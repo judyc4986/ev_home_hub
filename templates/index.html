@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tesla x Washington EV Scenario Hub</title>
+    <style>
+        :root {
+            --tesla-red: #e82127;
+            --dark: #050509;
+            --card: #111218;
+            --soft: #171922;
+            --text: #f3f4f6;
+            --muted: #9ca3af;
+            --border: #272b37;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at 20% 0%, #1f2937 0, #050509 50%, black 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial;
+            color: var(--text);
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: auto;
+            padding: 32px 20px 48px;
+        }
+
+        /* ---------------- HERO ------------------ */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(232, 33, 39, 0.18);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #fca5a5;
+        }
+
+        .pill-bar {
+            width: 10px;
+            height: 2px;
+            background: var(--tesla-red);
+        }
+
+        h1 {
+            margin-top: 8px;
+            margin-bottom: 6px;
+            font-size: 30px;
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            margin-bottom: 14px;
+        }
+
+        .hero-p {
+            color: #e5e7eb;
+            line-height: 1.55;
+            max-width: 650px;
+        }
+
+        .hero-meta {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .hero-meta strong { color: white; }
+
+        .hero-meta .highlight { color: var(--tesla-red); }
+
+        /* ------ SPEEDOMETER CARD (TESLA FUN) ------- */
+        .speedo-card {
+            background: linear-gradient(140deg, #111827, #020617);
+            border-radius: 18px;
+            border: 1px solid rgba(148,163,184,0.28);
+            padding: 18px;
+            width: 260px;
+            box-shadow: 0 14px 42px rgba(0,0,0,.7);
+        }
+
+        .speedo-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .speedo-sub { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+
+        .speedo-gauge {
+            height: 120px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 0%, #334155 0, #020617 60%, black 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arc { 
+            position: absolute; inset: 12px 24px;
+            border-top: 2px solid rgba(148,163,184,.45);
+            border-radius: 999px;
+        }
+
+        .arc-red {
+            border-top-color: var(--tesla-red);
+            inset: 20px 36px;
+        }
+
+        .needle {
+            position: absolute;
+            width: 2px;
+            height: 42px;
+            background: var(--tesla-red);
+            bottom: 14px;
+            left: 50%;
+            transform-origin: bottom;
+            transform: rotate(20deg);
+            box-shadow: 0 0 10px rgba(255,0,0,0.7);
+        }
+
+        .glow-dot {
+            position: absolute;
+            width: 8px; height: 8px;
+            background: var(--tesla-red);
+            border-radius: 999px;
+            right: 30%; top: 24%;
+            box-shadow: 0 0 12px rgba(255,100,100,1);
+        }
+
+        /* ---------------- CARDS ------------------ */
+        .section-title { font-size: 20px; margin-bottom: 4px; }
+        .section-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 28px rgba(0,0,0,.55);
+        }
+
+        .card-tag {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            margin-bottom: 6px;
+        }
+
+        .card-tag span { color: var(--tesla-red); }
+
+        .card h2 { margin: 0 0 8px; font-size: 18px; }
+
+        .card p { font-size: 14px; line-height: 1.55; }
+
+        .btn-primary {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 9px 18px;
+            background: var(--tesla-red);
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* -------------- INFO GRID ---------------- */
+        .info-grid {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 2fr 1.8fr;
+            gap: 20px;
+        }
+
+        .info-box {
+            background: var(--soft);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .info-box h3 { margin: 0 0 6px; }
+
+        .info-box p { 
+            margin: 0 0 10px;
+            font-size: 13px; 
+            color: #e5e7eb;
+            line-height: 1.65;
+        }
+
+        .timeline {
+            margin-top: 10px;
+            border-left: 2px solid var(--tesla-red);
+            padding-left: 14px;
+        }
+
+        .timeline-item {
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info-pill {
+            display: inline-block;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            color: var(--muted);
+            background: rgba(255,255,255,.05);
+            border: 1px solid #4b5563;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        footer {
+            margin-top: 34px;
+            padding-top: 14px;
+            text-align: center;
+            border-top: 1px dashed #374151;
+            color: var(--muted);
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- HERO -->
+    <header>
+        <div>
+            <div class="pill">
+                <span class="pill-bar"></span>
+                WA Climate · Tesla Strategy
+            </div>
+            <p class="hero-sub">Scenario modeling for policy + market share</p>
+            <h1>Washington EV Adoption Simulator & Tesla Demand Explorer</h1>
+            <p class="hero-p">
+                This hub combines Washington’s climate policy targets with Tesla-style EV demand modeling.
+                Explore how supercharger deployment, county adoption curves, and statewide rollout strategies
+                shape both <strong>greenhouse gas reduction progress</strong> and <strong>EV market share dynamics</strong>.
+            </p>
+            <p class="hero-meta">
+                Built by <strong>Judy Cheng</strong> — data-driven simulations for
+                <span class="highlight">state planners, utilities, and EV strategists</span>.
+            </p>
+        </div>
+
+        <div class="speedo-card">
+            <div class="speedo-title">EV demand keeps rising</div>
+            <div class="speedo-sub">Tesla still leads U.S. EV sales, even as competition increases.</div>
+            <div class="speedo-gauge">
+                <div class="arc"></div>
+                <div class="arc arc-red"></div>
+                <div class="needle"></div>
+                <div class="glow-dot"></div>
+            </div>
+            <div class="speedo-sub" style="margin-top:8px;">
+                The tools below let you “rev the dial” on chargers and adoption to see where Tesla gains or loses demand.
+            </div>
+        </div>
+    </header>
+
+    <!-- TOOLS -->
+    <section>
+        <h2 class="section-title">Explore the tools</h2>
+        <p class="section-sub">Choose a local view or a statewide forecast.</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-tag">Tool 01 · <span>County-level</span></div>
+                <h2>County EV vs Supercharger Curves</h2>
+                <p>
+                    See how each Washington county’s EV adoption responds to supercharger growth. Compare urban vs.
+                    rural behavior and identify adoption bottlenecks.
+                </p>
+                <a class="btn-primary" href="https://ev-county-level.onrender.com/" target="_blank">Open County Tool</a>
+            </div>
+
+            <div class="card">
+                <div class="card-tag">Tool 02 · <span>Statewide</span></div>
+                <h2>Statewide EV & Infrastructure Forecast</h2>
+                <p>
+                    Test statewide charger scenarios and forecast high-level adoption. Ideal for policy planning or
+                    understanding long-term EV demand curves.
+                </p>
+                <a class="btn-primary" href="https://ev-forecast.onrender.com/" target="_blank">Open Statewide Tool</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- POLICY + TESLA SECTIONS -->
+    <section class="info-grid">
+
+        <!-- POLICY SECTION -->
+        <div class="info-box">
+            <h3>Washington’s Climate Policy: What Needs to Happen</h3>
+            <p>
+                Washington law requires deep greenhouse gas reductions:
+                <strong>45% by 2030, 70% by 2040, and 95% by 2050</strong>. 
+                Transportation is the state’s single largest emissions source, so adoption of clean vehicles is central
+                to reaching these legally mandated milestones.
+            </p>
+            <p>
+                The state has adopted California’s Advanced Clean Cars and Advanced Clean Cars II standards,
+                gradually increasing the required share of zero-emission new vehicle sales. Your tools model how
+                charger build-out and EV adoption trajectories move counties — and the state — toward these targets.
+            </p>
+
+            <!-- TIMELINE -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">2025–2030</div>
+                    <p>Accelerated EV incentives + corridor charging build-out.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">2030 Target</div>
+                    <p>45% statewide greenhouse gas reduction milestone.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">2035 Target</div>
+                    <p>All new light-duty vehicles must be zero-emission under ACC II.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">2040–2050</div>
+                    <p>70–95% GHG reduction requirement — long-term charging capacity planning.</p>
+                </div>
+            </div>
+
+            <div style="margin-top:10px;">
+                <span class="info-pill">ACC & ACC II</span>
+                <span class="info-pill">45% by 2030</span>
+                <span class="info-pill">70% by 2040</span>
+                <span class="info-pill">95% by 2050</span>
+            </div>
+        </div>
+
+        <!-- TESLA DEMAND SECTION -->
+        <div class="info-box">
+            <h3>Tesla Market Share: Strategic Implications</h3>
+            <p>
+                Tesla still commands roughly half of U.S. EV sales, but faces steady competitive pressure. 
+                Fast-charging access — especially along I-5, I-90, and urban hubs — remains one of Tesla’s 
+                strongest growth levers.
+            </p>
+            <p>
+                As Washington increases its clean-vehicle requirements, annual EV demand rises sharply.
+                Your scenarios help reveal:
+            </p>
+
+            <ul style="list-style:none; padding-left:0; margin-top:6px;">
+                <li>• Where added superchargers unlock new Tesla demand</li>
+                <li>• Which counties offer the highest incremental EV growth</li>
+                <li>• How statewide EV adoption shifts Tesla’s potential market share</li>
+                <li>• Where competitors may gain first-mover advantage</li>
+            </ul>
+
+            <p style="margin-top:6px;">
+                The result: a dual-purpose tool for both public-sector climate planning and private-sector EV strategy.
+            </p>
+
+            <div style="margin-top:10px;">
+                <span class="info-pill">Demand modeling</span>
+                <span class="info-pill">Charger impact</span>
+                <span class="info-pill">Market share defense</span>
+                <span class="info-pill">WA corridor strategy</span>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        Educational EV simulation · Not affiliated with Tesla or Washington State · Built by Judy Cheng
+    </footer>
+</div>
+</body>
+</html>

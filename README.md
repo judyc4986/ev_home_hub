@@ -96,23 +96,22 @@ These formulas power the interactive forecasting tools—no heavy computation re
 
 The diagram below shows how a user moves from the **Home Hub** to either the **Statewide** or **County-Level** tools, and then into the forecast results.
 
-
-                       +----------------------+
-                       |       Home Hub       |
-                       +----------+-----------+
-                                  |
-          +-----------------------+------------------------+
-          |                                                |
-    +-----v-----------------------+            +-----------v----------------------+
-    |     Statewide Forecast Tool |            |     County-Level Forecast Tool  |
-    |     (ev_render_app)         |            |     (ev_forecast_app)           |
-    +-----------------------------+            +-------------------------------+
-                  |                                                |
-                  +-------------------------+----------------------+
-                                            |
-                                 +----------v----------+
-                                 |      Forecast       |
-                                 |      Results        |
-                                 | (EV Registrations & |
-                                 |      Adoption)      |
-                                 +---------------------+
+                         +----------------------+
+                         |       Home Hub       |
+                         +----------+-----------+
+                                    |
+            +-----------------------+-----------------------+
+            |                                               |
+    +-------v-----------------------+       +---------------v----------------------+
+    |     Statewide Forecast Tool   |       |     County-Level Forecast Tool      |
+    |         (ev_render_app)       |       |         (ev_forecast_app)           |
+    +---------------+---------------+       +------------------+-------------------+
+                    |                                          |
+                    +----------------------+-------------------+
+                                           |
+                                 +---------v----------+
+                                 |     Forecast       |
+                                 |      Results       |
+                                 | (EV Registrations  |
+                                 |    & Adoption)     |
+                                 +--------------------+

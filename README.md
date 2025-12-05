@@ -101,13 +101,14 @@ flowchart TD
     A[Home Hub] --> B[Statewide Forecast Tool]
     A --> C[County-Level Forecast Tool]
 
-    B --> D[Input: Supercharger Scenario]
+    B --> D[Input: Supercharger]
     D --> E[Output: Statewide EV Forecast]
 
-    C --> F[Input: Select County + Scenario]
+    C --> F[Input: County + Supercharger]
     F --> G[Output: County EV Forecast]
 
     E --> H[Insights for Planning]
     G --> H
+
 
 

@@ -97,17 +97,17 @@ These formulas power the interactive forecasting tools—no heavy computation re
 The diagram below shows how a user moves from the **Home Hub** to either the **Statewide** or **County-Level** tools, and then into the forecast results.
 
 ```mermaid
-flowchart LR
-    U[👤 User] --> H[🏠 Home Hub<br/>Washington EV Hub]
+flowchart TD
+    A[Home Hub] --> B[Statewide Forecast Tool]
+    A --> C[County-Level Forecast Tool]
 
-    H --> S[🌎 Statewide Forecast Tool<br/>(ev_render_app)]
-    H --> C[🗺️ County-Level Forecast Tool<br/>(ev_forecast_app)]
+    B --> D[Input: Supercharger Scenario]
+    D --> E[Output: Statewide EV Forecast]
 
-    S --> S_Input[Enter statewide supercharger scenario]
-    S_Input --> S_Results[📊 Statewide EV adoption & charger needs<br/>2024–2050]
+    C --> F[Input: Select County + Scenario]
+    F --> G[Output: County EV Forecast]
 
-    C --> C_Input[Select county + supercharger level]
-    C_Input --> C_Results[📈 County EV registrations & adoption curves<br/>2024–2050]
+    E --> H[Insights for Planning]
+    G --> H
 
-    S_Results --> Policy[📌 Insights for policy & infrastructure planning]
-    C_Results --> Policy
+

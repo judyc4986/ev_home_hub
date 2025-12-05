@@ -97,7 +97,7 @@ These formulas power the interactive forecasting tools—no heavy computation re
 The diagram below shows how a user moves from the **Home Hub** to either the **Statewide** or **County-Level** tools, and then into the forecast results.
 
 ```mermaid
-flowchart LD
+flowchart TD
     A[         Home Hub         ] --> B[         Statewide Forecast Tool         ]
     A --> C[         County-Level Forecast Tool         ]
 
@@ -109,3 +109,4 @@ flowchart LD
 
     E --> H[         Insights for Planning         ]
     G --> H
+
